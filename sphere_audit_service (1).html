@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Комплексный аудит сайта — SPHERE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06060c;--bg2:#0c0c18;--bg3:#111124;--bg4:#181830;
+  --border:#1c1c38;--border2:#2a2a4a;
+  --t1:#ededf4;--t2:#9898b8;--t3:#5e5e7e;
+  --acc:#c850ff;--acc-g:#c850ff40;--acc-s:#c850ff14;
+  --cyan:#38d9f5;--cyan-g:#38d9f520;
+  --grn:#44dd88;--grn-bg:#44dd8810;
+  --f:'Manrope',system-ui,sans-serif;--fm:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font-family:var(--f);background:var(--bg);color:var(--t1);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--acc);color:#fff}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+.r{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.r.v{opacity:1;transform:translateY(0)}
+.c{max-width:860px;margin:0 auto;padding:0 24px}
+a{color:var(--acc);text-decoration:none}
+
+/* HERO */
+.hero{position:relative;padding:140px 24px 80px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-35%;right:-15%;width:550px;height:550px;background:radial-gradient(circle,var(--acc-g) 0%,transparent 70%);pointer-events:none;animation:gl 8s ease-in-out infinite alternate}
+.hero::after{content:'';position:absolute;bottom:-30%;left:-10%;width:450px;height:450px;background:radial-gradient(circle,var(--cyan-g) 0%,transparent 70%);pointer-events:none;animation:gl 10s ease-in-out infinite alternate-reverse}
+@keyframes gl{0%{opacity:.5;transform:scale(1)}100%{opacity:.8;transform:scale(1.12)}}
+.hero .logo{position:relative;z-index:1;font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--acc);margin-bottom:32px}
+.hero h1{position:relative;z-index:1;font-size:clamp(28px,5vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-bottom:16px}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--acc),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{position:relative;z-index:1;font-size:16px;color:var(--t2);max-width:560px;margin:0 auto 32px;line-height:1.7}
+.hero .price-hero{position:relative;z-index:1;display:inline-flex;align-items:baseline;gap:8px;margin-bottom:32px}
+.hero .price-hero .amt{font-size:clamp(40px,6vw,60px);font-weight:800;background:linear-gradient(135deg,var(--acc),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .price-hero .cur{font-size:18px;font-weight:600;color:var(--t3)}
+.cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--acc),#8830cc);color:#fff;padding:14px 34px;border-radius:100px;font-weight:700;font-size:15px;transition:transform .25s,box-shadow .25s;box-shadow:0 0 36px var(--acc-g);position:relative;z-index:1}
+.cta:hover{transform:translateY(-2px);box-shadow:0 0 56px var(--acc-g);color:#fff}
+
+/* SECTIONS */
+section{padding:72px 0}
+.stag{font-size:10px;text-transform:uppercase;letter-spacing:.15em;font-weight:700;color:var(--acc);margin-bottom:12px}
+.stitle{font-size:clamp(24px,3.5vw,36px);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:16px}
+.sdesc{font-size:15px;color:var(--t2);max-width:580px;line-height:1.7;margin-bottom:40px}
+
+/* STAGE BLOCKS */
+.stage{padding:32px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;margin-bottom:16px;display:grid;grid-template-columns:56px 1fr;gap:20px;transition:border-color .3s}
+.stage:hover{border-color:var(--border2)}
+.stage-n{font-family:var(--fm);font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--acc),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.stage h3{font-size:17px;font-weight:800;margin-bottom:6px}
+.stage .sub{font-size:13px;color:var(--t2);margin-bottom:14px;line-height:1.55}
+.sl{list-style:none;display:grid;gap:6px}
+.sl li{font-size:13px;color:var(--t2);padding:10px 14px 10px 34px;position:relative;background:var(--bg3);border-radius:10px;line-height:1.45}
+.sl li::before{content:'✓';position:absolute;left:13px;top:10px;color:var(--grn);font-weight:700;font-size:12px}
+.stage-res{margin-top:14px;padding:14px 18px;background:var(--acc-s);border:1px solid var(--acc-g);border-radius:12px;font-size:13px;line-height:1.5}
+.stage-res strong{color:var(--acc);font-weight:700}
+
+/* WHAT YOU GET */
+.gets{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.get{padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;transition:border-color .3s}
+.get:hover{border-color:var(--border2)}
+.get .ico{font-size:28px;margin-bottom:12px}
+.get h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.get p{font-size:13px;color:var(--t2);line-height:1.5}
+
+/* TIMELINE */
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border-radius:16px;overflow:hidden;border:1px solid var(--border)}
+.tl-step{padding:24px 20px;background:var(--bg2);text-align:center;transition:background .3s}
+.tl-step:hover{background:var(--bg3)}
+.tl-step .day{font-family:var(--fm);font-size:24px;font-weight:800;color:var(--cyan);margin-bottom:4px}
+.tl-step .lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);font-weight:700;margin-bottom:8px}
+.tl-step p{font-size:12px;color:var(--t2);line-height:1.45}
+
+/* PRICE BLOCK */
+.price-block{text-align:center;padding:48px 32px;background:var(--bg2);border:1px solid var(--border);border-radius:24px;position:relative;overflow:hidden}
+.price-block::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;background:radial-gradient(circle,var(--acc-s) 0%,transparent 70%);pointer-events:none}
+.price-block .price-label{position:relative;z-index:1;font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--t3);font-weight:700;margin-bottom:8px}
+.price-block .price-big{position:relative;z-index:1;font-size:56px;font-weight:800;background:linear-gradient(135deg,var(--acc),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;line-height:1.1}
+.price-block .price-cur{position:relative;z-index:1;font-size:16px;color:var(--t3);margin-bottom:16px}
+.price-block .price-inc{position:relative;z-index:1;font-size:14px;color:var(--t2);max-width:480px;margin:0 auto 28px;line-height:1.6}
+.price-block .cta{position:relative;z-index:1}
+
+/* FINAL CTA */
+.final{text-align:center;padding:100px 24px;position:relative;overflow:hidden}
+.final::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,var(--acc-g) 0%,transparent 70%);pointer-events:none}
+.final h2{position:relative;z-index:1;font-size:clamp(24px,4vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px;line-height:1.15}
+.final p{position:relative;z-index:1;font-size:15px;color:var(--t2);max-width:460px;margin:0 auto 28px;line-height:1.7}
+
+/* FOOTER */
+.ft{padding:40px 0;border-top:1px solid var(--border);text-align:center}
+.ft .fl{font-size:24px;font-weight:800;letter-spacing:.08em;background:linear-gradient(135deg,var(--acc),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.ft p{font-size:11px;color:var(--t3)}
+
+@media(max-width:768px){
+  .stage{grid-template-columns:1fr;gap:10px}
+  .stage-n{font-size:24px}
+  .timeline{grid-template-columns:1fr}
+  .gets{grid-template-columns:1fr}
+  section{padding:48px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="logo r">SPHERE</div>
+  <h1 class="r">Комплексный <em>аудит сайта</em></h1>
+  <p class="r">Разберём ваш сайт по всем направлениям — дизайн, тексты, удобство, скорость, мобильная версия, поисковая оптимизация — и дадим конкретный план, что и в каком порядке исправлять.</p>
+  <div class="price-hero r"><span class="amt">$500</span><span class="cur">USD</span></div>
+  <br>
+  <a href="https://t.me/kirillsysa" target="_blank" class="cta r">Заказать аудит →</a>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section>
+  <div class="c">
+    <div class="stag r">Что входит в аудит</div>
+    <div class="stitle r">6 направлений проверки</div>
+    <div class="sdesc r">Мы проверяем сайт глазами пользователя, глазами поисковика и глазами разработчика. Ничего не упускаем.</div>
+
+    <div class="gets">
+      <div class="get r">
+        <h4>Аудит дизайна</h4>
+        <p>Оформление всех страниц, единый стиль, читаемость текста, визуальная иерархия, цвета, шрифты.</p>
+      </div>
+      <div class="get r">
+        <h4>Аудит удобства</h4>
+        <p>Проходим весь путь пользователя: регистрация, поиск, оплата, восстановление пароля, фильтры, пустые состояния.</p>
+      </div>
+      <div class="get r">
+        <h4>Аудит текстов</h4>
+        <p>Юридические страницы, описания, подписи кнопок, сообщения об ошибках, переводы на все языки.</p>
+      </div>
+      <div class="get r">
+        <h4>Аудит поисковой оптимизации</h4>
+        <p>Заголовки страниц, описания, адреса, карта сайта, разметка для соцсетей, языковые версии.</p>
+      </div>
+      <div class="get r">
+        <h4>Аудит мобильной версии</h4>
+        <p>Как сайт выглядит и работает на телефонах и планшетах: меню, кнопки, картинки, формы, скорость.</p>
+      </div>
+      <div class="get r">
+        <h4>Аудит скорости</h4>
+        <p>Что замедляет загрузку страниц, где тратится лишний трафик, какие картинки и скрипты тормозят сайт.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)">
+  <div class="c">
+    <div class="stag r">Как проходит аудит</div>
+    <div class="stitle r">Подробный процесс</div>
+    <div class="sdesc r">От первого знакомства с сайтом до готового отчёта с планом действий.</div>
+
+    <div class="stage r">
+      <div class="stage-n">01</div>
+      <div>
+        <h3>Знакомство с проектом</h3>
+        <div class="sub">Изучаем ваш бизнес, аудиторию и задачи сайта — чтобы оценивать не абстрактно, а в контексте ваших целей.</div>
+        <ul class="sl">
+          <li>Созвон или переписка: узнаём, что сайт должен делать для бизнеса</li>
+          <li>Изучаем, кто ваши пользователи и с каких устройств они приходят</li>
+          <li>Смотрим на конкурентов — как выглядят и работают похожие сайты в нише</li>
+        </ul>
+        <div class="stage-res"><strong>Результат:</strong> мы понимаем контекст и можем оценивать сайт не «вообще», а для вашей аудитории</div>
+      </div>
+    </div>
+
+    <div class="stage r">
+      <div class="stage-n">02</div>
+      <div>
+        <h3>Проверка глазами пользователя</h3>
+        <div class="sub">Проходим сайт так, как это делают ваши посетители — на компьютере и на телефоне. Записываем всё, что мешает.</div>
+        <ul class="sl">
+          <li>Регистрация, вход, восстановление пароля — проверяем все формы</li>
+          <li>Поиск, фильтры, категории — легко ли найти нужное</li>
+          <li>Юридические страницы — читаемость, полнота, оформление</li>
+          <li>Мобильная версия — меню, кнопки, картинки, прокрутка</li>
+          <li>Пустые состояния — что видит пользователь, когда ничего не найдено</li>
+          <li>Тексты и переводы — опечатки, коды вместо текста, смешение языков</li>
+        </ul>
+        <div class="stage-res"><strong>Результат:</strong> список всех проблем, с которыми сталкивается реальный пользователь</div>
+      </div>
+    </div>
+
+    <div class="stage r">
+      <div class="stage-n">03</div>
+      <div>
+        <h3>Техническая проверка</h3>
+        <div class="sub">Проверяем то, что пользователь не видит, но что влияет на скорость, позиции в поисковиках и стабильность.</div>
+        <ul class="sl">
+          <li>Скорость загрузки — что именно тормозит сайт</li>
+          <li>Картинки — размер, формат, загружаются ли по мере прокрутки</li>
+          <li>Адреса страниц — корректность, дубли, переадресации</li>
+          <li>Заголовки и описания страниц для поисковиков</li>
+          <li>Карта сайта и разметка для соцсетей</li>
+          <li>Языковые версии — правильно ли настроены переключение и адреса</li>
+        </ul>
+        <div class="stage-res"><strong>Результат:</strong> список технических проблем с пояснениями, что каждая из них означает</div>
+      </div>
+    </div>
+
+    <div class="stage r">
+      <div class="stage-n">04</div>
+      <div>
+        <h3>Отчёт и план действий</h3>
+        <div class="sub">Собираем все находки в понятный документ — без технического жаргона, с приоритетами и конкретными рекомендациями.</div>
+        <ul class="sl">
+          <li>Общая оценка сайта по каждому направлению</li>
+          <li>Список проблем, отсортированный по важности</li>
+          <li>Конкретная рекомендация по каждой проблеме — что именно сделать</li>
+          <li>Приоритеты: что исправить первым, что может подождать</li>
+          <li>Оценка объёма работ для каждого этапа исправлений</li>
+        </ul>
+        <div class="stage-res"><strong>Результат:</strong> готовый отчёт, который можно передать любой команде разработки — или обсудить с нами дальнейшую работу</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+  <div class="c">
+    <div class="stag r">Сроки</div>
+    <div class="stitle r">Как быстро вы получите результат</div>
+
+    <div class="timeline r">
+      <div class="tl-step">
+        <div class="day">1 день</div>
+        <div class="lbl">Знакомство</div>
+        <p>Созвон, изучение проекта, анализ конкурентов</p>
+      </div>
+      <div class="tl-step">
+        <div class="day">3–4 дня</div>
+        <div class="lbl">Проверка</div>
+        <p>Полный аудит: пользовательский и технический</p>
+      </div>
+      <div class="tl-step">
+        <div class="day">1–2 дня</div>
+        <div class="lbl">Отчёт</div>
+        <p>Оформление, приоритеты, рекомендации</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section style="background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)">
+  <div class="c">
+    <div class="stag r">Что вы получите</div>
+    <div class="stitle r">Результат аудита</div>
+
+    <div class="gets">
+      <div class="get r">
+        <h4>Понятный отчёт</h4>
+        <p>Без технического жаргона. Каждая проблема описана так, чтобы было ясно, что не так и почему это важно.</p>
+      </div>
+      <div class="get r">
+        <h4>План действий</h4>
+        <p>Проблемы расставлены по приоритету — вы знаете, что исправлять первым, а что может подождать.</p>
+      </div>
+      <div class="get r">
+        <h4>Готовые рекомендации</h4>
+        <p>По каждой проблеме — конкретное решение. Отчёт можно передать любой команде разработки.</p>
+      </div>
+      <div class="get r">
+        <h4>Разбор по видеозвонку</h4>
+        <p>После отправки отчёта — созвон, где мы проходим по каждому пункту и отвечаем на вопросы.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section>
+  <div class="c">
+    <div class="price-block r">
+      <div class="price-label">Стоимость аудита</div>
+      <div class="price-big">$500</div>
+      <div class="price-cur">USD · срок 5–7 рабочих дней</div>
+      <div class="price-inc">6 направлений проверки · подробный отчёт · план действий с приоритетами · разбор по видеозвонку</div>
+      <a href="https://t.me/kirillsysa" target="_blank" class="cta">Заказать аудит →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <h2 class="r">Есть вопросы? Напишите нам</h2>
+  <p class="r">Расскажем подробнее, ответим на вопросы и обсудим, подходит ли аудит для вашей ситуации.</p>
+  <a href="https://t.me/kirillsysa" target="_blank" class="cta r">
+    Написать в Telegram
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+  </a>
+</section>
+
+<footer class="ft">
+  <div class="c">
+    <div class="fl">SPHERE</div>
+    <p>Развиваем бизнес через разработку эффективных IT-решений<br><a href="https://sphereagency.pro/" target="_blank">sphereagency.pro</a></p>
+  </div>
+</footer>
+
+<script>
+const o=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.classList.add('v'),o.unobserve(e.target))})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.r').forEach(e=>o.observe(e));
+</script>
+</body>
+</html>
